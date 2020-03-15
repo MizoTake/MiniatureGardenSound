@@ -1,0 +1,3 @@
+[submodule "Unity/Assets/UnityWav"]
+	path = Unity/Assets/UnityWav
+	url = git@github.com:MizoTake/UnityWav.git
