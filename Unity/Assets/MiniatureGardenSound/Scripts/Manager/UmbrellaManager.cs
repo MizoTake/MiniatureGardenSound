@@ -15,11 +15,13 @@ namespace MiniatureGardenSound.Scripts.Manager
         private MovableUmbrella[] movableUmbrellas;
         
         private ISoundParamProvider soundProvider;
+        private IParameterThresholdProvider thresholdProvider;
 
         [Inject]
-        private void Inject(ISoundParamProvider soundProvider)
+        private void Inject(ISoundParamProvider soundProvider, IParameterThresholdProvider thresholdProvider)
         {
             this.soundProvider = soundProvider;
+            this.thresholdProvider = thresholdProvider;
         }
         
         // 音のボリュームも変えていいのかもa
@@ -34,6 +36,10 @@ namespace MiniatureGardenSound.Scripts.Manager
                     .TakeUntilDestroy(umbrella)
                     .Subscribe(x =>
                     {
+                        if (x < thresholdProvider.WaitRequest)
+                        {
+                            umbrella.IsWait = true;
+                        }
                     });
             }
         }
