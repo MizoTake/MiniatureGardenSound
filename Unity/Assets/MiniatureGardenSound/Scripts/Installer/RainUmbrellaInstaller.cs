@@ -10,7 +10,7 @@ namespace MiniatureGardenSound.Scripts.Installer
         public override void InstallBindings()
         {
             Container.Bind(typeof(IInitializable), typeof(ISoundParamProvider), typeof(ITickable)).To<SoundParamProvider>().AsSingle();
-            Container.Bind(typeof(IInitializable)).To<UmbrellaManager>().AsSingle();
+            Container.Bind(typeof(IInitializable), typeof(ITickable)).To<UmbrellaManager>().AsSingle();
         }
     }
 }

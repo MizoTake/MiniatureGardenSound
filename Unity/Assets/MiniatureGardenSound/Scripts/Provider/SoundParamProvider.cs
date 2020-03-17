@@ -17,7 +17,7 @@ namespace MiniatureGardenSound.Scripts.Provider
         
         public float Time { get; private set; }
         public float Power { get; private set; }
-        public float Amp { get; } = 10.0f;
+        public float Amp { get; } = 8.0f;
 
         [Inject]
         private void Injection(AudioSource source, INativeProvidable nativeProvider)
@@ -49,6 +49,11 @@ namespace MiniatureGardenSound.Scripts.Provider
 
             Time = source.time;
             Power = spec.Sum();
+            for (var i = 0; i < source.clip.channels; i++)
+            {
+                source.GetSpectrumData(spec, i, FFTWindow.Hamming);
+                Debug.Log($"index: {i}, {spec.Sum()}");
+            }
         }
     }
 }

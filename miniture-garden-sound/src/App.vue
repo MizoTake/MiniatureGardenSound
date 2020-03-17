@@ -21,35 +21,31 @@
         }"
         unityLoader="unitybuild/Build/UnityLoader.js"
       ></unity>
-      <dragAndDrop 
+      <dragAndDrop
         ref="dragAndDrop"
-        v-on:unitySendMessageLength="unitySendMessageLength"
         v-on:unitySendMessage="unitySendMessage"
         v-on:disableOverlay="disableOverlay"
       ></dragAndDrop>
-      <overlayInput
-        ref="overlayInput"
-        v-on:disableOverlay="disableOverlayFromOverlayInput"
-      ></overlayInput>
+      <overlayMenu ref="overlayMenu" v-on:disableOverlay="disableOverlayFromOverlayMenu"></overlayMenu>
     </main>
   </div>
 </template>
 
 <script>
-import unity from 'vue-unity-webgl'
-import overlayInput from './components/OverlayInputField.vue'
-import dragAndDrop from './components/DragAndDropArea.vue'
+import unity from "vue-unity-webgl"
+import overlayMenu from "./components/OverlayMenu.vue"
+import dragAndDrop from "./components/DragAndDropArea.vue"
 
 export default {
-  name: 'App',
+  name: "App",
   data: function() {
     return {
       gameWidth: window.innerWidth,
       gameHeight: window.innerHeight,
       overlay: false,
-      overlayInputDisable: false,
+      overlayMenuDisable: false,
       unity: unity
-    }
+    };
   },
   methods: {
     handleResize: function() {
@@ -57,51 +53,51 @@ export default {
       this.gameHeight = window.innerHeight
     },
     onClick: function() {
-      if (this.overlayInputDisable) {
-        this.overlayInputDisable = false
+      if (this.overlayMenuDisable) {
+        this.overlayMenuDisable = false
         return
       }
       this.overlay = true
-      this.$refs.overlayInput.enableOverlay()
+      this.$refs.overlayMenu.enableOverlay()
     },
     disableOverlay: function() {
       this.overlay = false
     },
-    disableOverlayFromOverlayInput: function() {
+    disableOverlayFromOverlayMenu: function() {
       this.overlay = false
-      this.overlayInputDisable = true
+      this.overlayMenuDisable = true
     },
     checkDrag(event, status) {
       this.overlay = status
     },
     onDrop(event) {
+      this.overlay = true;
       this.$refs.dragAndDrop.onDrop(event)
-    },
-    unitySendMessageLength: function(len) {
-      this.$refs.unity.message("NativeProvider", "MusicLength", len)
     },
     unitySendMessage: function(byteString) {
       var splitLength = 1000
       var len = parseInt(byteString.length / splitLength)
       this.$refs.unity.message("NativeProvider", "MusicLength", len + 1)
-      for(var i = 0; i<len; i++) {
+      for (var i = 0; i < len; i++) {
         var next = byteString.substr(i * splitLength, splitLength)
         this.$refs.unity.message("NativeProvider", "DropMusic", next)
       }
-      var last = byteString.substr(splitLength * len, byteString.length % splitLength)
-      console.log(last)
+      var last = byteString.substr(
+        splitLength * len,
+        byteString.length % splitLength
+      )
       this.$refs.unity.message("NativeProvider", "DropMusic", last)
       this.overlay = false
     }
   },
   mounted: function() {
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener("resize", this.handleResize)
   },
   beforeDestroy: function() {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener("resize", this.handleResize)
   },
-  components: { unity, overlayInput, dragAndDrop }
-}
+  components: { unity, overlayMenu, dragAndDrop }
+};
 </script>
 
 <style>
@@ -143,7 +139,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 .webglContent .logo {
-  background: url('/unitybuild/TemplateData/progressLogo.Light.png') no-repeat
+  background: url("/unitybuild/TemplateData/progressLogo.Light.png") no-repeat
     center / contain;
   width: 154px;
   height: 130px;
@@ -154,7 +150,7 @@ export default {
   margin-top: 90px;
 }
 .webglContent .progress .empty {
-  background: url('/unitybuild/TemplateData/progressEmpty.Light.png') no-repeat
+  background: url("/unitybuild/TemplateData/progressEmpty.Light.png") no-repeat
     right / cover;
   float: right;
   width: 100%;
@@ -162,7 +158,7 @@ export default {
   display: inline-block;
 }
 .webglContent .progress .full {
-  background: url('/unitybuild/TemplateData/progressFull.Light.png') no-repeat
+  background: url("/unitybuild/TemplateData/progressFull.Light.png") no-repeat
     left / cover;
   float: left;
   width: 0%;
@@ -171,12 +167,12 @@ export default {
 }
 
 .webglContent .logo.Dark {
-  background-image: url('/unitybuild/TemplateData/progressLogo.Dark.png');
+  background-image: url("/unitybuild/TemplateData/progressLogo.Dark.png");
 }
 .webglContent .progress.Dark .empty {
-  background-image: url('/unitybuild/TemplateData/progressEmpty.Dark.png');
+  background-image: url("/unitybuild/TemplateData/progressEmpty.Dark.png");
 }
 .webglContent .progress.Dark .full {
-  background-image: url('/unitybuild/TemplateData/progressFull.Dark.png');
+  background-image: url("/unitybuild/TemplateData/progressFull.Dark.png");
 }
 </style>

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace MiniatureGardenSound.Scripts.Manager
 {
-    public class UmbrellaManager : IInitializable
+    public class UmbrellaManager : IInitializable, ITickable
     {
         [Inject(Id = "Left")]
         private Transform[] leftUmbrellas;
@@ -23,9 +23,7 @@ namespace MiniatureGardenSound.Scripts.Manager
             this.soundProvider = soundProvider;
             this.thresholdProvider = thresholdProvider;
         }
-        
-        // 音のボリュームも変えていいのかもa
-        // 音からの数値で動かす数などを決めて行く
+
         public void Initialize()
         {
             foreach (var umbrella in movableUmbrellas)
@@ -41,6 +39,14 @@ namespace MiniatureGardenSound.Scripts.Manager
                             umbrella.IsWait = true;
                         }
                     });
+            }
+        }
+
+        public void Tick()
+        {
+            foreach (var umbrella in movableUmbrellas)
+            {
+                umbrella.AgentSpeed = 1.5f + umbrella.AgentSpeed * soundProvider.Power;
             }
         }
     }

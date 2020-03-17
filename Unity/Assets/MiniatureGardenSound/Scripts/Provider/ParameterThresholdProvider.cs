@@ -1,4 +1,5 @@
-﻿using MiniatureGardenSound.Scripts.Provider.Interface;
+﻿using System;
+using MiniatureGardenSound.Scripts.Provider.Interface;
 using UnityEngine;
 
 namespace MiniatureGardenSound.Scripts.Provider
@@ -12,10 +13,12 @@ namespace MiniatureGardenSound.Scripts.Provider
         [Range(0f, 100f), SerializeField] private float umbrellaMoveTimeEnd = 16f;
         [Range(0f, 100f), SerializeField] private float rotateTimeBegin = 4f;
         [Range(0f, 100f), SerializeField] private float rotateTimeEnd = 6f;
+        [Range(0f, 50f), SerializeField] private float noiseRange = 0f;
 
         public float WaitRequest => waitRequest;
         public (float, float) WaitTime => (waitTimeBegin, waitTimeEnd);
         public (float, float) UmbrellaMoveTime => (umbrellaMoveTimeBegin, umbrellaMoveTimeEnd);
         public (float, float) RotateTime => (rotateTimeBegin, rotateTimeEnd);
+        public float NoiseRange => noiseRange;
     }
 }

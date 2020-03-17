@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "gsap": "^3.2.4",
     "vue": "^2.6.11",
     "vue-material": "^1.0.0-beta-11",
     "vue-unity-webgl": "^1.2.0"

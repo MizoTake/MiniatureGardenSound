@@ -25,6 +25,17 @@ namespace MiniatureGardenSound.Scripts
         private Subject<State> stateSubject = new Subject<State>();
 
         public IObservable<State> StateAsObservable => stateSubject;
+
+        public float AgentSpeed
+        {
+            get => agent.speed;
+            set
+            {
+                if (IsWait) return;
+                agent.speed = value;
+            }
+        }
+
         public bool IsWait { get; set; }
 
         public enum State
@@ -49,13 +60,11 @@ namespace MiniatureGardenSound.Scripts
             var (begin, end) = thresholdProvider.RotateTime;
             var time = Random.Range(begin, end);
             transform.DORotate(new Vector3(0f, 360f), time, RotateMode.FastBeyond360).SetLoops(-1).Play();
-//            transform.DOScale(Vector3.one * Random.Range(1f, 1.3f), time).SetLoops(-1).Play();
         }
 
         async void Update()
         {
             await WaitIfNeed();
-//            agent.speed *= moveTime * Time.deltaTime;
             if (!(agent.remainingDistance < agent.radius)) return;
             stateSubject.OnNext(State.Wait);
             isBeginLeftSide = isBeginLeftSide.Toggle();
@@ -83,10 +92,9 @@ namespace MiniatureGardenSound.Scripts
             {
                 var (begin, end) = thresholdProvider.WaitTime;
                 var waitTime = Random.Range(begin, end);
-                var navSpeed = agent.speed;
                 agent.speed = 0f;
                 await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
-                agent.speed = navSpeed;
+                agent.speed = AgentSpeed;
                 IsWait = false;
             }
         }

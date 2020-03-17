@@ -6,5 +6,6 @@ namespace MiniatureGardenSound.Scripts.Provider.Interface
         (float, float) WaitTime { get; }
         (float, float) UmbrellaMoveTime { get; }
         (float, float) RotateTime { get; }
+        float NoiseRange { get; }
     }
 }
