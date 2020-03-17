@@ -72,7 +72,10 @@ export default {
     },
     onDrop(event) {
       this.overlay = true;
-      this.$refs.dragAndDrop.onDrop(event)
+      var parent = this
+      new Promise(function() {
+        parent.$refs.dragAndDrop.onDrop(event)
+      })
     },
     unitySendMessage: function(byteString) {
       var splitLength = 1000
