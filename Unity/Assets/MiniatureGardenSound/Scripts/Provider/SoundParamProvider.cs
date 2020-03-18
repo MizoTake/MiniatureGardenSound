@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CrazyMinnow.AmplitudeWebGL;
 using MiniatureGardenSound.Scripts.Provider.Interface;
 using UniRx;
 using UnityEngine;
@@ -9,9 +10,8 @@ namespace MiniatureGardenSound.Scripts.Provider
     public class SoundParamProvider : IInitializable, ITickable, ISoundParamProvider
     {
 
-        private AudioSource source;
         private INativeProvidable nativeProvider;
-        private float[] spec = new float[1024];
+        private Amplitude amplitude;
 
         private float currentMusicTime;
         
@@ -20,17 +20,17 @@ namespace MiniatureGardenSound.Scripts.Provider
         public float Amp { get; } = 8.0f;
 
         [Inject]
-        private void Injection(AudioSource source, INativeProvidable nativeProvider)
+        private void Injection(Amplitude amplitude, INativeProvidable nativeProvider)
         {
-            this.source = source;
             this.nativeProvider = nativeProvider;
+            this.amplitude = amplitude;
         }
         
         public void Initialize()
         {
             ChangedMusic();
             nativeProvider.ChangedMusic
-                .TakeUntilDestroy(source)
+                .TakeUntilDestroy(amplitude.audioSource)
                 .Subscribe(x =>
                 {
                     ChangedMusic();
@@ -39,21 +39,16 @@ namespace MiniatureGardenSound.Scripts.Provider
 
         private void ChangedMusic()
         {
-            currentMusicTime = source.time;
+            currentMusicTime = amplitude.audioSource.time;
             Random.InitState((int) currentMusicTime);
+            amplitude.Setup();
+            amplitude.audioSource.Play();
         }
 
         public void Tick()
         {
-            source.GetSpectrumData(spec, 0, FFTWindow.Hamming);
-
-            Time = source.time;
-            Power = spec.Sum();
-            for (var i = 0; i < source.clip.channels; i++)
-            {
-                source.GetSpectrumData(spec, i, FFTWindow.Hamming);
-                Debug.Log($"index: {i}, {spec.Sum()}");
-            }
+            Time = amplitude.audioSource.time;
+            Power = amplitude.sample.Sum() / 15f;
         }
     }
 }

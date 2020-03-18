@@ -3,17 +3,17 @@
     <div id="overlay" v-if="overlay" v-on:click.self="disableOverlay">
       <span class="description">Drag & Drop .wav file</span>
       <div id="content">
-        <a :href="defaultMusic">
+        <a :href="twitter" target="_blank" rel="noopener">
+          <span class="twitter">Twitter</span>
+        </a>
+        <a :href="defaultMusic" target="_blank" rel="noopener">
           <span class="defaultMusic">Default Music</span>
         </a>
-        <a :href="github">
+        <a :href="github" target="_blank" rel="noopener">
           <span class="github">GitHub</span>
         </a>
-        <a :href="twitter">
-          <span class="twitter">twitter</span>
-        </a>
-        <a :href="license">
-          <span class="license">license</span>
+        <a :href="copyright" target="_blank" rel="noopener">
+          <span class="copyright">Copyright</span>
         </a>
       </div>
     </div>
@@ -27,7 +27,7 @@ export default {
     defaultMusic: "https://soundcloud.com/takeru-mizoguchi/nights-burnt",
     github: "https://github.com/MizoTake/MiniatureGardenSound",
     twitter: "https://twitter.com/OrangeGKeeper",
-    license: ""
+    copyright: "https://raw.githubusercontent.com/MizoTake/MiniatureGardenSound/master/USE_ASSETS"
   }),
   methods: {
     enableOverlay: function() {
@@ -98,7 +98,7 @@ export default {
   font-size: 24px;
 }
 
-.license {
+.copyright {
   position: absolute;
   top: 70%;
   left: 50%;

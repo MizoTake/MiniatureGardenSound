@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using CrazyMinnow.AmplitudeWebGL;
 using MiniatureGardenSound.Scripts.Provider.Interface;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace MiniatureGardenSound.Scripts.Provider
 {
 
     public class NativeProvider : MonoBehaviour, INativeProvidable
     {
-        [SerializeField] private AudioSource source;
+        private Amplitude amplitude;
 
         private int length;
         private int index;
@@ -18,9 +20,10 @@ namespace MiniatureGardenSound.Scripts.Provider
         private Subject<Unit> changedMusic = new Subject<Unit>();
         public IObservable<Unit> ChangedMusic => changedMusic;
         
-        public void Injection(AudioSource source)
+        [Inject]
+        public void Injection(Amplitude amplitude)
         {
-            this.source = source;
+            this.amplitude = amplitude;
         }
 
         public void MusicLength(int length)
@@ -41,8 +44,8 @@ namespace MiniatureGardenSound.Scripts.Provider
 
         private void UpdateMusic()
         {
-            source.clip = WavUtility.ToAudioClip(musicByte.ToArray());
-            source.Play();
+            amplitude.audioSource.Stop();
+            amplitude.audioSource.clip = WavUtility.ToAudioClip(musicByte.ToArray());
             changedMusic.OnNext(Unit.Default);
         }
     }

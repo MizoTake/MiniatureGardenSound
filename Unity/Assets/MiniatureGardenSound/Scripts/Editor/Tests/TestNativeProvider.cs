@@ -13,7 +13,7 @@ namespace Tests
             var gameObject = new GameObject();
             var audioSource = gameObject.AddComponent<AudioSource>();
             var provider = gameObject.AddComponent<NativeProvider>();
-            provider.Injection(audioSource);
+//            provider.Injection(audioSource);
             var splitLength = 10000;
             var len = mockMusic.Length / splitLength;
             provider.MusicLength(len + 1);

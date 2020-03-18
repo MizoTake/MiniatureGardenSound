@@ -347,6 +347,7 @@ MonoBehaviour:
   umbrellaMoveTimeEnd: 16
   rotateTimeBegin: 4
   rotateTimeEnd: 6
+  noiseRange: 0
 --- !u!114 &64737794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2888,6 +2889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563670515}
   - component: {fileID: 563670514}
+  - component: {fileID: 563670517}
   - component: {fileID: 563670516}
   m_Layer: 0
   m_Name: SoundSource
@@ -3020,10 +3022,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 563670514}
+  - {fileID: 563670517}
   _identifier: 
   _useSceneContext: 1
   _context: {fileID: 83342457}
   _bindType: 0
+--- !u!114 &563670517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563670513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d91f43ba836b24694dcfaf8b6ab7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  sampleSize: 64
+  absoluteValues: 1
+  boost: 0.2
+  freqBoost: 0
+  average: 0
+  max: 0
+  sample: []
+  dataType: 0
+  sampleSizeNames:
+  - 64
+  - 128
+  - 256
+  - 512
+  - 1024
+  - 2048
+  sampleSizeVals: 400000008000000000010000000200000004000000080000
 --- !u!4 &575974609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1038487984, guid: 6a48f57552c8fb243b35ae934c83e238,
