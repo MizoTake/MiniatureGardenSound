@@ -41,7 +41,7 @@ namespace MiniatureGardenSound.Scripts.Provider
         {
             currentMusicTime = amplitude.audioSource.time;
             Random.InitState((int) currentMusicTime);
-            amplitude.Setup();
+            // amplitude.Setup();
             amplitude.audioSource.Play();
         }
 
