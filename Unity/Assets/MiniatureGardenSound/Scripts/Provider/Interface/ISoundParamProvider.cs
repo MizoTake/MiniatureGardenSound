@@ -6,5 +6,6 @@ namespace MiniatureGardenSound.Scripts.Provider.Interface
         float Time { get; }
         float Power { get; }
         float Amp { get; }
+        bool IsJustChangedBeat { get; }
     }
 }

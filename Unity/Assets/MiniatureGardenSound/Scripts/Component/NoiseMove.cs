@@ -28,6 +28,7 @@ namespace MiniatureGardenSound.Scripts.Component
 
         void Update()
         {
+            if (soundProvider.IsJustChangedBeat) return;
             var t = soundProvider.Time * NoiseSpeed;
             var range = thresholdProvider.NoiseRange;
             var coeff = NoiseCoeff;

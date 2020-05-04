@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CrazyMinnow.AmplitudeWebGL;
+using MiniatureGardenSound.Scripts.Extensions;
 using MiniatureGardenSound.Scripts.Provider.Interface;
 using UniRx;
 using UnityEngine;
@@ -9,21 +10,24 @@ namespace MiniatureGardenSound.Scripts.Provider
 {
     public class SoundParamProvider : IInitializable, ITickable, ISoundParamProvider
     {
-
+        
         private INativeProvidable nativeProvider;
         private Amplitude amplitude;
+        private MusicUnity music;
 
         private float currentMusicTime;
         
         public float Time { get; private set; }
         public float Power { get; private set; }
         public float Amp { get; } = 8.0f;
+        public bool IsJustChangedBeat => music.IsJustChangedBeat();
 
         [Inject]
-        private void Injection(Amplitude amplitude, INativeProvidable nativeProvider)
+        private void Injection(Amplitude amplitude, INativeProvidable nativeProvider, MusicUnity music)
         {
             this.nativeProvider = nativeProvider;
             this.amplitude = amplitude;
+            this.music = music;
         }
         
         public void Initialize()
@@ -41,12 +45,13 @@ namespace MiniatureGardenSound.Scripts.Provider
         {
             currentMusicTime = amplitude.audioSource.time;
             Random.InitState((int) currentMusicTime);
-            // amplitude.Setup();
+            amplitude.Setup();
             amplitude.audioSource.Play();
         }
 
         public void Tick()
         {
+            if (!music.IsPlaying) return;
             Time = amplitude.audioSource.time;
             Power = amplitude.sample.Sum() / 15f;
         }
