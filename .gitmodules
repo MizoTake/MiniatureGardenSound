@@ -1,3 +1,6 @@
 [submodule "Unity/Assets/UnityWav"]
 	path = Unity/Assets/UnityWav
 	url = git@github.com:MizoTake/UnityWav.git
+[submodule "Unity/Assets/MusicEngine"]
+	path = Unity/Assets/MusicEngine
+	url = git@github.com:geekdrums/MusicEngine.git
