@@ -51,6 +51,7 @@ namespace MiniatureGardenSound.Scripts.Provider
 
         public void Tick()
         {
+            Debug.Log(music.Just);
             if (!music.IsPlaying) return;
             Time = amplitude.audioSource.time;
             Power = amplitude.sample.Sum() / 15f;

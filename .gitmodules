@@ -4,3 +4,6 @@
 [submodule "Unity/Assets/MusicEngine"]
 	path = Unity/Assets/MusicEngine
 	url = git@github.com:geekdrums/MusicEngine.git
+[submodule "Unity/Assets/SceneObject/ac269f3148bc5192cc2eb6d472870d24"]
+	path = Unity/Assets/SceneObject/ac269f3148bc5192cc2eb6d472870d24
+	url = git@gist.github.com:ac269f3148bc5192cc2eb6d472870d24.git

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MiniatureGardenSound/Scene/Main.unity
+    path: Assets/MiniatureGardenSound/Scene/SharedMain.unity
     guid: 18edc2ed09c86a44db468f7e174f90a3
+  - enabled: 1
+    path: Assets/MiniatureGardenSound/Scene/Rain.unity
+    guid: 207c0b860faa07e4dbdb23f40b589f0b
   m_configObjects: {}
