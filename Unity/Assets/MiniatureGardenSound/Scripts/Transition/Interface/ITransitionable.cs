@@ -1,8 +1,10 @@
-﻿namespace MiniatureGardenSound.Scripts.Transition.Interface
+﻿using UniRx.Async;
+
+namespace MiniatureGardenSound.Scripts.Transition.Interface
 {
     public interface ITransitionable
     {
-        void Enable();
-        void Disable();
+        UniTask Enable();
+        UniTask Disable();
     }
 }

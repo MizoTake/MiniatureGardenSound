@@ -31,6 +31,8 @@ namespace MiniatureGardenSound.Scripts.Manager
             }
 #endif
             await UniSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive);
+            // transitionのコール
+            
         }
 
         public static async UniTask RemoveAsync(SceneObject removeScene)
