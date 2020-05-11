@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniatureGardenSound.Scripts
+namespace MiniatureGardenSound
 {
     public class PostEffect : MonoBehaviour
     {

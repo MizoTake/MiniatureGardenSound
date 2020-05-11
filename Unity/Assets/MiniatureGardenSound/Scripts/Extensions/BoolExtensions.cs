@@ -1,4 +1,4 @@
-﻿namespace MiniatureGardenSound.Scripts.Extensions
+﻿namespace MiniatureGardenSound.Extensions
 {
     public static class BoolExtensions
     {

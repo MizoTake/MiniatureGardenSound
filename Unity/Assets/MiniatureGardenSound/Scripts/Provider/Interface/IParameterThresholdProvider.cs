@@ -1,4 +1,4 @@
-namespace MiniatureGardenSound.Scripts.Provider.Interface
+namespace MiniatureGardenSound.Provider.Interface
 {
     public interface IParameterThresholdProvider
     {

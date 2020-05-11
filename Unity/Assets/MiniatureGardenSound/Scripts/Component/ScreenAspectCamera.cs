@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MiniatureGardenSound.Scripts.Component
+namespace MiniatureGardenSound.Component
 {
     public class ScreenAspectCamera : MonoBehaviour
     {

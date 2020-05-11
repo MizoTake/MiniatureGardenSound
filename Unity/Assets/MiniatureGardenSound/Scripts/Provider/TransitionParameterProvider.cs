@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using MiniatureGardenSound.Provider.Interface;
+using UnityEngine;
 
-namespace MiniatureGardenSound.Scripts.Provider
+namespace MiniatureGardenSound.Provider
 {
-    public class TransitionParameterProvider : MonoBehaviour
+    public class TransitionParameterProvider : MonoBehaviour, ITransitionParameterProvidable
     {
-        // TODO: transitonに必要なパラメーターをmonobehaviourで入れる
-        // TODO: transiton classはpure C#でScene情報とともにinjectionされてscene切り替えの時に呼べるようにする
+    
+        [SerializeField] private GameObject[] activeOrder;
+
+        public GameObject[] ActiveOrder => activeOrder;
+        
     }
 }

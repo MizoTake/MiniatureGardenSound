@@ -1,9 +1,8 @@
-﻿using System;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+﻿using MiniatureGardenSound.Provider.Interface;
 using UnityEngine;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Component
+namespace MiniatureGardenSound.Component
 {
     public class NoiseMove : MonoBehaviour
     {

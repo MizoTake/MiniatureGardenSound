@@ -1,6 +1,6 @@
 ﻿using UniRx.Async;
 
-namespace MiniatureGardenSound.Scripts.Transition.Interface
+namespace MiniatureGardenSound.Transition.Interface
 {
     public interface ITransitionable
     {

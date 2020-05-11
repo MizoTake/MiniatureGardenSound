@@ -2,7 +2,7 @@
 using CrazyMinnow.AmplitudeWebGL;
 using UniRx;
 
-namespace MiniatureGardenSound.Scripts.Provider.Interface
+namespace MiniatureGardenSound.Provider.Interface
 {
     public interface INativeProvidable
     {

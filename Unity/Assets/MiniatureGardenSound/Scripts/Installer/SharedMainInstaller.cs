@@ -1,8 +1,8 @@
-﻿using MiniatureGardenSound.Scripts.Provider;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+﻿using MiniatureGardenSound.Provider;
+using MiniatureGardenSound.Provider.Interface;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Installer
+namespace MiniatureGardenSound.Installer
 {
     public class SharedMainInstaller : MonoInstaller
     {

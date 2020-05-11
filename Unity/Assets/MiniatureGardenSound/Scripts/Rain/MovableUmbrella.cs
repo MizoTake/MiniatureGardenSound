@@ -1,7 +1,7 @@
 ﻿using System;
 using DG.Tweening;
-using MiniatureGardenSound.Scripts.Extensions;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+using MiniatureGardenSound.Extensions;
+using MiniatureGardenSound.Provider.Interface;
 using UniRx;
 using UniRx.Async;
 using UnityEngine;
@@ -9,7 +9,7 @@ using UnityEngine.AI;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace MiniatureGardenSound.Scripts
+namespace MiniatureGardenSound.Rain
 {
     public class MovableUmbrella : MonoBehaviour
     {

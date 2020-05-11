@@ -1,26 +1,27 @@
-﻿using MiniatureGardenSound.Scripts.Transition.Interface;
+﻿using MiniatureGardenSound.Provider.Interface;
+using MiniatureGardenSound.Transition.Interface;
 using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Transition
+namespace MiniatureGardenSound.Transition
 {
-    public class RainTransition : MonoBehaviour, ITransitionable
+    public class RainTransition : ITransitionable, IInitializable
     {
 
-        [SerializeField] private GameObject[] activeOrder;
-
         private MusicUnity musicUnity;
+        private ITransitionParameterProvidable parameterProvidable;
 
         [Inject]
-        private void Injection(MusicUnity musicUnity)
+        private void Injection(MusicUnity musicUnity, ITransitionParameterProvidable parameterProvidable)
         {
             this.musicUnity = musicUnity;
+            this.parameterProvidable = parameterProvidable;
         }
-
-        private void Awake()
+        
+        public void Initialize()
         {
-            foreach (var obj in activeOrder)
+            foreach (var obj in parameterProvidable.ActiveOrder)
             {
                 obj.SetActive(false);
             }
@@ -30,10 +31,10 @@ namespace MiniatureGardenSound.Scripts.Transition
         {
             Debug.Log("enable");
             var index = 0;
-            while (index != activeOrder.Length)
+            while (index != parameterProvidable.ActiveOrder.Length)
             {
                 await UniTask.WaitWhile(() => musicUnity.IsJustChangedBeat());
-                activeOrder[index].SetActive(true);
+                parameterProvidable.ActiveOrder[index].SetActive(true);
                 index += 1;
                 await UniTask.WaitWhile(() => musicUnity.IsJustChangedBeat() == false);
             }

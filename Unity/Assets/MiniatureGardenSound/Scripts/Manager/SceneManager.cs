@@ -1,24 +1,24 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using ModestTree;
 using UniRx.Async;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UniSceneManager = UnityEngine.SceneManagement.SceneManager;
 #if UNITY_EDITOR
-using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace MiniatureGardenSound.Scripts.Manager
+namespace MiniatureGardenSound.Manager
 {
     public static class SceneManager
     {
-        
         public static async UniTask AddingAsync(SceneObject addScene)
         {
 #if UNITY_EDITOR
-            var scenePath = EditorBuildSettings.scenes.Select(x => x.path).FirstOrDefault(x => Path.GetFileNameWithoutExtension(x) == addScene) ?? "";
+            var scenePath = GetScenes().FirstOrDefault(x => x == addScene) ?? "";
             if (scenePath.IsEmpty())
             {
                 Debug.LogWarning("Scene Load Warrning : Loaded Scene");
@@ -31,8 +31,6 @@ namespace MiniatureGardenSound.Scripts.Manager
             }
 #endif
             await UniSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive);
-            // transitionのコール
-            
         }
 
         public static async UniTask RemoveAsync(SceneObject removeScene)
@@ -55,5 +53,17 @@ namespace MiniatureGardenSound.Scripts.Manager
 #endif
             await UniSceneManager.UnloadSceneAsync(removeScene);
         }
+        
+#if UNITY_EDITOR
+        private static IEnumerable<string> GetScenes()
+        {
+            return AssetDatabase.FindAssets("t:SceneAsset")
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(path => AssetDatabase.LoadAssetAtPath(path, typeof(SceneAsset)))
+                .Where(obj => obj != null)
+                .Select(obj => (SceneAsset) obj)
+                .Select(asset => Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(asset)));
+        }
+#endif
     }
 }

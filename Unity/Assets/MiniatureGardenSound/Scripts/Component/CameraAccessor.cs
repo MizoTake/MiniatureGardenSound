@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DiamondSnakeGame.Scripts.Components
+namespace MiniatureGardenSound.Component
 {
     public static class CameraAccessor
     {

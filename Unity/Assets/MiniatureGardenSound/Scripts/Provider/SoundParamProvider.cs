@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using CrazyMinnow.AmplitudeWebGL;
-using MiniatureGardenSound.Scripts.Extensions;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+using MiniatureGardenSound.Extensions;
+using MiniatureGardenSound.Provider.Interface;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Provider
+namespace MiniatureGardenSound.Provider
 {
     public class SoundParamProvider : IInitializable, ITickable, ISoundParamProvider
     {
@@ -51,7 +51,7 @@ namespace MiniatureGardenSound.Scripts.Provider
 
         public void Tick()
         {
-            Debug.Log(music.Just);
+//            Debug.Log(music.Just);
             if (!music.IsPlaying) return;
             Time = amplitude.audioSource.time;
             Power = amplitude.sample.Sum() / 15f;

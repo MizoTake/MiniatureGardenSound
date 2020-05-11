@@ -1,17 +1,16 @@
-﻿using MiniatureGardenSound.Scripts.Manager;
-using UniRx.Async;
+﻿using MiniatureGardenSound.Manager;
 using UnityEngine;
 
-namespace MiniatureGardenSound.Scripts.Component
+namespace MiniatureGardenSound.Component
 {
     public class ShotSceneLoader : MonoBehaviour
     {
 
         [SerializeField] private SceneObject firstAddingScene;
         
-        void Start()
+        async void Start()
         {
-            SceneManager.AddingAsync(firstAddingScene).Forget();
+            await SceneManager.AddingAsync(firstAddingScene);
         }
     }
 }

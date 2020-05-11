@@ -1,8 +1,7 @@
-﻿using System;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+﻿using MiniatureGardenSound.Provider.Interface;
 using UnityEngine;
 
-namespace MiniatureGardenSound.Scripts.Provider
+namespace MiniatureGardenSound.Provider.Rain
 {
     public class ParameterThresholdProvider : MonoBehaviour, IParameterThresholdProvider
     {

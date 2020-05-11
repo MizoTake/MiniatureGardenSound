@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using CrazyMinnow.AmplitudeWebGL;
-using MiniatureGardenSound.Scripts.Provider.Interface;
+using MiniatureGardenSound.Provider.Interface;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Provider
+namespace MiniatureGardenSound.Provider
 {
 
     public class NativeProvider : MonoBehaviour, INativeProvidable

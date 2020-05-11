@@ -1,4 +1,4 @@
-﻿using MiniatureGardenSound.Scripts.Provider;
+﻿using MiniatureGardenSound.Provider;
 using NUnit.Framework;
 using UnityEngine;
 

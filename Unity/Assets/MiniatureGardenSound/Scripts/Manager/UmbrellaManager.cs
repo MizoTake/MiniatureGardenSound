@@ -1,9 +1,10 @@
-﻿using MiniatureGardenSound.Scripts.Provider.Interface;
+﻿using MiniatureGardenSound.Provider.Interface;
+using MiniatureGardenSound.Rain;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace MiniatureGardenSound.Scripts.Manager
+namespace MiniatureGardenSound.Manager
 {
     public class UmbrellaManager : IInitializable, ITickable
     {
