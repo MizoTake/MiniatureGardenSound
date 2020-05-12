@@ -24,7 +24,7 @@ namespace MiniatureGardenSound.Manager
                 Debug.LogWarning("Scene Load Warrning : Loaded Scene");
                 return;
             }
-            if (Application.isEditor)
+            if (!Application.isPlaying)
             {
                 EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
                 return;

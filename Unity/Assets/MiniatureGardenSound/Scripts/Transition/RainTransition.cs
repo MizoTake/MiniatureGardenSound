@@ -6,7 +6,7 @@ using Zenject;
 
 namespace MiniatureGardenSound.Transition
 {
-    public class RainTransition : ITransitionable, IInitializable
+    public class RainTransition : ISceneTransitionable, IInitializable
     {
 
         private MusicUnity musicUnity;
@@ -27,20 +27,20 @@ namespace MiniatureGardenSound.Transition
             }
         }
 
-        public async UniTask Enable()
+        public async UniTask Show()
         {
             Debug.Log("enable");
             var index = 0;
             while (index != parameterProvidable.ActiveOrder.Length)
             {
-                await UniTask.WaitWhile(() => musicUnity.IsJustChangedBeat());
+                await UniTask.WaitWhile(() => musicUnity.IsJustChangedBar());
                 parameterProvidable.ActiveOrder[index].SetActive(true);
                 index += 1;
-                await UniTask.WaitWhile(() => musicUnity.IsJustChangedBeat() == false);
+                await UniTask.WaitWhile(() => musicUnity.IsJustChangedBar() == false);
             }
         }
 
-        public UniTask Disable()
+        public UniTask Hide()
         {
             Debug.Log("Disable");
             return UniTask.CompletedTask;

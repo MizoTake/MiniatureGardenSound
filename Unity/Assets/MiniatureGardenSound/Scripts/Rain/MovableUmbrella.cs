@@ -28,7 +28,7 @@ namespace MiniatureGardenSound.Rain
 
         public float AgentSpeed
         {
-            get => agent.speed;
+            get => agent ? agent.speed : 0;
             set
             {
                 if (IsWait) return;

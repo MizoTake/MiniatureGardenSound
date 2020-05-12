@@ -1,18 +1,28 @@
-﻿using System;
+﻿using MiniatureGardenSound.Transition.Interface;
 using UnityEngine;
+using Zenject;
 
 namespace MiniatureGardenSound.Cycle
 {
     public class SceneCycle : MonoBehaviour
     {
-        private void Awake()
+
+        private ISceneTransitionable transition;
+
+        [Inject]
+        private void Injection(ISceneTransitionable transition)
         {
-            // todo: transition処理
+            this.transition = transition;
+        }
+        
+        private async void Awake()
+        {
+            await transition.Show();
         }
 
-        private void OnDestroy()
+        private async void OnDestroy()
         {
-            // transition抜け処理？ 非同期なら問題ないはず
+            await transition.Hide();
         }
     }
 }

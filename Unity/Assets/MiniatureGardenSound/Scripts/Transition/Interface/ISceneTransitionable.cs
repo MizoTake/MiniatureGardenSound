@@ -2,9 +2,9 @@
 
 namespace MiniatureGardenSound.Transition.Interface
 {
-    public interface ITransitionable
+    public interface ISceneTransitionable
     {
-        UniTask Enable();
-        UniTask Disable();
+        UniTask Show();
+        UniTask Hide();
     }
 }
