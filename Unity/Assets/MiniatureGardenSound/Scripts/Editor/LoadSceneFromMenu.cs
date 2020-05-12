@@ -1,7 +1,4 @@
-﻿using UniRx.Async;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEditor;
 using SceneManager = MiniatureGardenSound.Manager.SceneManager;
 
 namespace MiniatureGardenSound.Scripts.Editor

@@ -1,4 +1,4 @@
-﻿using UniRx.Async;
+﻿using Cysharp.Threading.Tasks;
 
 namespace MiniatureGardenSound.Transition.Interface
 {

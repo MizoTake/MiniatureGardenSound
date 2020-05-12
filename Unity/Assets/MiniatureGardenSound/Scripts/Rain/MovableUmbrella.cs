@@ -1,9 +1,9 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MiniatureGardenSound.Extensions;
 using MiniatureGardenSound.Provider.Interface;
 using UniRx;
-using UniRx.Async;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

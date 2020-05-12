@@ -1,6 +1,6 @@
-﻿using MiniatureGardenSound.Provider.Interface;
+﻿using Cysharp.Threading.Tasks;
+using MiniatureGardenSound.Provider.Interface;
 using MiniatureGardenSound.Transition.Interface;
-using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
