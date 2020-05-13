@@ -1,6 +1,5 @@
 ﻿using MiniatureGardenSound.Manager;
 using MiniatureGardenSound.Provider;
-using MiniatureGardenSound.Provider.Interface;
 using Zenject;
 
 namespace MiniatureGardenSound.Installer
