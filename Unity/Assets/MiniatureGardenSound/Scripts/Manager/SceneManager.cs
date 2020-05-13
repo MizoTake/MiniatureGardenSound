@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using MiniatureGardenSound.Manager.Interface;
 using ModestTree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 using UniSceneManager = UnityEngine.SceneManagement.SceneManager;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,9 +16,24 @@ using UnityEditor.SceneManagement;
 
 namespace MiniatureGardenSound.Manager
 {
-    public static class SceneManager
+    public class SceneManager : ISceneManagable
     {
-        public static async UniTask AddingAsync(SceneObject addScene)
+
+        private ZenjectSceneLoader sceneLoader;
+        
+#if UNITY_EDITOR
+        public SceneManager()
+        {
+            
+        }
+#endif
+        
+        SceneManager(ZenjectSceneLoader sceneLoader)
+        {
+            this.sceneLoader = sceneLoader;
+        }
+
+        public async UniTask AddingAsync(SceneObject addScene, Action<DiContainer> extraBindings = null)
         {
 #if UNITY_EDITOR
             var scenePath = GetScenes().FirstOrDefault(x => x == addScene) ?? "";
@@ -30,10 +48,10 @@ namespace MiniatureGardenSound.Manager
                 return;
             }
 #endif
-            await UniSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive);
+            await sceneLoader.LoadSceneAsync(addScene, LoadSceneMode.Additive, extraBindings);
         }
 
-        public static async UniTask RemoveAsync(SceneObject removeScene)
+        public async UniTask RemoveAsync(SceneObject removeScene)
         {
 #if UNITY_EDITOR
             var isSharedMainExists = false;
@@ -55,7 +73,7 @@ namespace MiniatureGardenSound.Manager
         }
         
 #if UNITY_EDITOR
-        private static IEnumerable<string> GetScenes()
+        private IEnumerable<string> GetScenes()
         {
             return AssetDatabase.FindAssets("t:SceneAsset")
                 .Select(AssetDatabase.GUIDToAssetPath)

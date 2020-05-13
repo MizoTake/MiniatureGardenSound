@@ -1,5 +1,5 @@
-﻿using UnityEditor;
-using SceneManager = MiniatureGardenSound.Manager.SceneManager;
+﻿using MiniatureGardenSound.Manager;
+using UnityEditor;
 
 namespace MiniatureGardenSound.Scripts.Editor
 {
@@ -11,7 +11,8 @@ namespace MiniatureGardenSound.Scripts.Editor
         [MenuItem("MiniatureGardenSound/SharedMain")]
         private static async void LoadSharedMain()
         {
-            await SceneManager.AddingAsync(SharedMain);
+            var sceneManager = new SceneManager();
+            await sceneManager.AddingAsync(SharedMain);
         }
     }
 }
