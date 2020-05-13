@@ -7,3 +7,6 @@
 [submodule "Unity/Assets/SceneObject/ac269f3148bc5192cc2eb6d472870d24"]
 	path = Unity/Assets/SceneObject/ac269f3148bc5192cc2eb6d472870d24
 	url = git@gist.github.com:ac269f3148bc5192cc2eb6d472870d24.git
+[submodule "Unity/Assets/TweenExt/6c393710ab5bd7acc946c0af2d0873d0"]
+	path = Unity/Assets/TweenExt/6c393710ab5bd7acc946c0af2d0873d0
+	url = git@gist.github.com:6c393710ab5bd7acc946c0af2d0873d0.git
