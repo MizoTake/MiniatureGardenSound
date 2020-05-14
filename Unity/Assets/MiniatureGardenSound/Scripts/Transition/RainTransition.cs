@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using MiniatureGardenSound.Provider.Interface;
 using MiniatureGardenSound.Transition.Interface;
 using UnityEngine;
@@ -29,7 +30,8 @@ namespace MiniatureGardenSound.Transition
 
         public async UniTask Show()
         {
-            Debug.Log("enable");
+            await parameterProvidable.FadeImage.DOFade(0, 0.1f);
+            
             var index = 0;
             while (index != parameterProvidable.ActiveOrder.Length)
             {

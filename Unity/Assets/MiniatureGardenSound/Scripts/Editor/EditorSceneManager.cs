@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MiniatureGardenSound.Manager.Interface;
-using ModestTree;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -17,13 +15,13 @@ namespace MiniatureGardenSound.Editor
     {
         public UniTask AddingAsync(SceneObject addScene, Action<DiContainer> extraBindings = null)
         {
-            var scenePath = GetScenes().FirstOrDefault(x => x == addScene) ?? "";
-            if (scenePath.IsEmpty())
+            var sceneAsset = GetScenes(addScene);
+            if (sceneAsset == null)
             {
                 Debug.LogWarning("Scene Load Warrning : Loaded Scene");
                 return UniTask.CompletedTask;
             }
-            SceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+            SceneManager.OpenScene(AssetDatabase.GetAssetPath(sceneAsset), OpenSceneMode.Additive);
             return UniTask.CompletedTask;
         }
 
@@ -42,14 +40,14 @@ namespace MiniatureGardenSound.Editor
             return UniTask.CompletedTask;
         }
         
-        private IEnumerable<string> GetScenes()
+        private SceneAsset GetScenes(string target)
         {
             return AssetDatabase.FindAssets("t:SceneAsset")
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(path => AssetDatabase.LoadAssetAtPath(path, typeof(SceneAsset)))
                 .Where(obj => obj != null)
                 .Select(obj => (SceneAsset) obj)
-                .Select(asset => Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(asset)));
+                .FirstOrDefault(asset => Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(asset)) == target);
         }
     }
 }
