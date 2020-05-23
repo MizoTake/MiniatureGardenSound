@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MiniatureGardenSound/Scene/Rain.unity
     guid: 207c0b860faa07e4dbdb23f40b589f0b
+  - enabled: 1
+    path: Assets/MiniatureGardenSound/Scene/Drive.unity
+    guid: 819e90a3007ac704bbd1683ca0fa5c54
+  - enabled: 1
+    path: Assets/MiniatureGardenSound/Scene/DriveBackground.unity
+    guid: de5220a7cd001074fb8a3188d37515ae
   m_configObjects: {}

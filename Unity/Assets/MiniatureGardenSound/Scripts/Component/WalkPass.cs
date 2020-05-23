@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,29 +12,32 @@ namespace MiniatureGardenSound.Component
         
         private NavMeshAgent agent;
         private int nextPassIndex;
+
+        private bool IsPathInvalid => agent.pathStatus == NavMeshPathStatus.PathInvalid;
         
         async void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             if (passPoint.Length == 0) return;
             
-            await UniTask.WaitWhile(() => agent.pathStatus == NavMeshPathStatus.PathInvalid);
+            await UniTask.WaitWhile(() => IsPathInvalid);
             
             var currentPoint = passPoint[nextPassIndex];
             agent.SetDestination(currentPoint.position);
         }
 
-        async Task Update()
+        async void Update()
         {
-            await UniTask.WaitWhile(() => agent.pathStatus == NavMeshPathStatus.PathInvalid);
-            
+            await UniTask.WaitWhile(() => IsPathInvalid);
+            if (agent.remainingDistance > agent.radius) return;
+            Debug.Log($"{agent.destination} {agent.remainingDistance} > {agent.radius}");
+
             if (passPoint.Length <= 0) return;
             nextPassIndex += 1;
             if (nextPassIndex >= passPoint.Length) nextPassIndex = 0;
+            Debug.Log(nextPassIndex);
             var currentPoint = passPoint[nextPassIndex];
             agent.SetDestination(currentPoint.position);
-            
-            await UniTask.WaitWhile(() => agent.remainingDistance < agent.radius);
         }
     }
 }
