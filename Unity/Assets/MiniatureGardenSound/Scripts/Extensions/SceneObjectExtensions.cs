@@ -4,7 +4,7 @@
     {
         public static bool IsEmpty(this SceneObject sceneObject)
         {
-            return sceneObject.ToString() == "SceneObject";
+            return (string)sceneObject == "";
         }
     }
 }
