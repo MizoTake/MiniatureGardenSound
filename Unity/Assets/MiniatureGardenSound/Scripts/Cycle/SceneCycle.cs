@@ -1,6 +1,5 @@
 ﻿using System;
 using MiniatureGardenSound.Transition.Interface;
-using UnityEngine;
 using Zenject;
 
 namespace MiniatureGardenSound.Cycle
@@ -18,7 +17,6 @@ namespace MiniatureGardenSound.Cycle
         
         public async void Initialize()
         {
-            Debug.Log("aaaaaaaaaa");
             await transition.Show();
         }
 

@@ -9,9 +9,9 @@ namespace MiniatureGardenSound.Installer
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<UmbrellaManager>().AsSingle();
-            Container.BindInterfacesAndSelfTo<RainTransition>().AsCached();
-            Container.BindInterfacesAndSelfTo<SceneCycle>().AsSingle();
+            Container.BindInterfacesTo<UmbrellaManager>().AsSingle();
+            Container.BindInterfacesTo<RainTransition>().AsCached();
+            Container.BindInterfacesTo<SceneCycle>().AsSingle();
         }
     }
 }

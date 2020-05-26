@@ -1,26 +1,15 @@
 using Cysharp.Threading.Tasks;
+using MiniatureGardenSound.Transition.Abstract;
 using MiniatureGardenSound.Transition.Interface;
-using Zenject;
 
 namespace MiniatureGardenSound.Transition
 {
-    public class DriveTransition : ISceneTransitionable, IInitializable
+    public class DriveTransition : BaseTransition, ISceneTransitionable
     {
 
-        [Inject]
-        private void Injection()
+        public async UniTask Show()
         {
-            
-        }
-        
-        public void Initialize()
-        {
-            throw new System.NotImplementedException();
-        }
-        
-        public UniTask Show()
-        {
-            throw new System.NotImplementedException();
+            await CommonShowing();
         }
 
         public UniTask Hide()
