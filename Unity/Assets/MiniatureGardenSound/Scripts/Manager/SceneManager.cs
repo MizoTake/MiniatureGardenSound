@@ -4,7 +4,6 @@ using MiniatureGardenSound.Data;
 using MiniatureGardenSound.Extensions;
 using MiniatureGardenSound.Manager.Interface;
 using MiniatureGardenSound.Scene;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 using UniSceneManager = UnityEngine.SceneManagement.SceneManager;

@@ -2,7 +2,6 @@
 using DG.Tweening;
 using MiniatureGardenSound.Provider.Interface;
 using MiniatureGardenSound.Transition.Interface;
-using UnityEngine;
 using Zenject;
 
 namespace MiniatureGardenSound.Transition
@@ -44,7 +43,6 @@ namespace MiniatureGardenSound.Transition
 
         public UniTask Hide()
         {
-            Debug.Log("Disable");
             return UniTask.CompletedTask;
         }
     }

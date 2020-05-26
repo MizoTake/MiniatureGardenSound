@@ -1,10 +1,11 @@
-﻿using MiniatureGardenSound.Transition.Interface;
+﻿using System;
+using MiniatureGardenSound.Transition.Interface;
 using UnityEngine;
 using Zenject;
 
 namespace MiniatureGardenSound.Cycle
 {
-    public class SceneCycle : MonoBehaviour
+    public class SceneCycle : IInitializable, IDisposable
     {
 
         private ISceneTransitionable transition;
@@ -15,12 +16,13 @@ namespace MiniatureGardenSound.Cycle
             this.transition = transition;
         }
         
-        private async void Awake()
+        public async void Initialize()
         {
+            Debug.Log("aaaaaaaaaa");
             await transition.Show();
         }
 
-        private async void OnDestroy()
+        public async void Dispose()
         {
             await transition.Hide();
         }
