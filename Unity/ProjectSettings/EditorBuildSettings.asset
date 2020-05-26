@@ -17,4 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MiniatureGardenSound/Scene/DriveBackground.unity
     guid: de5220a7cd001074fb8a3188d37515ae
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 140e97f06bb7f1c4784c8889bdc3d06b,
+      type: 2}

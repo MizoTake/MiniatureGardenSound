@@ -385,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &609223688
 Transform:
   m_ObjectHideFlags: 0
@@ -412,8 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccf6f4dd8917fc42991deb5f8a265b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAddingScene:
-    m_SceneName: Rain
+  scene: 1
 --- !u!1 &1007626772
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 36f17b61f4fb9cb4fa97735171908b28, type: 2}
   _monoInstallers:
   - {fileID: 2002542110}
   _installerPrefabs: []

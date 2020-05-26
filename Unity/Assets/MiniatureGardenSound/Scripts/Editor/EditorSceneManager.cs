@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MiniatureGardenSound.Manager.Interface;
+using MiniatureGardenSound.Scene;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -13,9 +14,9 @@ namespace MiniatureGardenSound.Editor
 {
     public class EditorSceneManager : ISceneManagable
     {
-        public UniTask AddingAsync(SceneObject addScene, Action<DiContainer> extraBindings = null)
+        public UniTask AddingAsync(Scenes scene, Action<DiContainer> extraBindings = null)
         {
-            var sceneAsset = GetScenes(addScene);
+            var sceneAsset = GetScenes(scene.ToString());
             if (sceneAsset == null)
             {
                 Debug.LogWarning("Scene Load Warrning : Loaded Scene");
@@ -25,15 +26,15 @@ namespace MiniatureGardenSound.Editor
             return UniTask.CompletedTask;
         }
 
-        public UniTask RemoveAsync(SceneObject removeScene)
+        public UniTask RemoveAsync(Scenes scene)
         {
             var isSharedMainExists = false;
             var scenePath = "";
             for (var index = 0; index < SceneManager.sceneCount; index++)
             {
-                var scene = SceneManager.GetSceneAt(index);
-                isSharedMainExists = scene.isLoaded && scene.name == removeScene;
-                scenePath = scene.path;
+                var sceneAt = SceneManager.GetSceneAt(index);
+                isSharedMainExists = sceneAt.isLoaded && sceneAt.name == scene.ToString();
+                scenePath = sceneAt.path;
             }
             if (!isSharedMainExists) return UniTask.CompletedTask;
             SceneManager.UnloadSceneAsync(scenePath);

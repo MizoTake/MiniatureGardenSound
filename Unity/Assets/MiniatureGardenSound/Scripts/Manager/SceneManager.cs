@@ -1,6 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using MiniatureGardenSound.Data;
+using MiniatureGardenSound.Extensions;
 using MiniatureGardenSound.Manager.Interface;
+using MiniatureGardenSound.Scene;
+using ModestTree;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 using UniSceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -11,21 +16,33 @@ namespace MiniatureGardenSound.Manager
     {
 
         private ZenjectSceneLoader sceneLoader;
+        private SceneList list;
 
-        SceneManager(ZenjectSceneLoader sceneLoader)
+        SceneManager(ZenjectSceneLoader sceneLoader, SceneList list)
         {
             this.sceneLoader = sceneLoader;
+            this.list = list;
         }
 
-        public async UniTask AddingAsync(SceneObject addScene, Action<DiContainer> extraBindings = null)
+        public async UniTask AddingAsync(Scenes scene, Action<DiContainer> extraBindings = null)
         {
+            var sceneData = list.Get(scene);
             await UniTask.SwitchToMainThread();
-            await sceneLoader.LoadSceneAsync(addScene, LoadSceneMode.Additive, extraBindings);
+            await sceneLoader.LoadSceneAsync(sceneData.mainScene, LoadSceneMode.Additive, extraBindings);
+            if (!sceneData.backgroundScene.IsEmpty())
+            {
+                await sceneLoader.LoadSceneAsync(sceneData.backgroundScene, LoadSceneMode.Additive, extraBindings);
+            }
         }
 
-        public async UniTask RemoveAsync(SceneObject removeScene)
+        public async UniTask RemoveAsync(Scenes scene)
         {
-            await UniSceneManager.UnloadSceneAsync(removeScene);
+            var sceneData = list.Get(scene);
+            await UniSceneManager.UnloadSceneAsync(sceneData.mainScene);
+            if (sceneData.backgroundScene != null)
+            {
+                await UniSceneManager.UnloadSceneAsync(sceneData.backgroundScene);
+            }
         }
     }
 }

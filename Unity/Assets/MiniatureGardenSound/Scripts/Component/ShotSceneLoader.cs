@@ -1,5 +1,5 @@
-﻿using MiniatureGardenSound.Manager;
-using MiniatureGardenSound.Manager.Interface;
+﻿using MiniatureGardenSound.Manager.Interface;
+using MiniatureGardenSound.Scene;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +8,7 @@ namespace MiniatureGardenSound.Component
     public class ShotSceneLoader : MonoBehaviour
     {
 
-        [SerializeField] private SceneObject firstAddingScene;
+        [SerializeField] private Scenes scene;
 
         private ISceneManagable sceneManager;
 
@@ -20,7 +20,7 @@ namespace MiniatureGardenSound.Component
         
         async void Start()
         {
-            await sceneManager.AddingAsync(firstAddingScene);
+            await sceneManager.AddingAsync(scene);
         }
     }
 }

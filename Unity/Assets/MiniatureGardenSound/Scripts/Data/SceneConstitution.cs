@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using MiniatureGardenSound.Confiig;
+using UnityEngine;
 
 namespace MiniatureGardenSound.Data
 {
-    [CreateAssetMenu(menuName="MiniatureGardenSound/SceneConstitution", fileName="SceneConstitution")]
+    [CreateAssetMenu(menuName=Define.MENU_NAME+"/SceneConstitution", fileName="SceneConstitution")]
     public class SceneConstitution : ScriptableObject
     {
         public SceneObject mainScene;
